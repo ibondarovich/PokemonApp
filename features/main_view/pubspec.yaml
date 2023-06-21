@@ -1,4 +1,4 @@
-name: core_ui
+name: main_view
 description: A new Flutter package project.
 version: 0.0.1
 homepage:
@@ -17,3 +17,4 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
+
