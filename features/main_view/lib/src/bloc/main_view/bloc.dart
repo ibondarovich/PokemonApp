@@ -19,7 +19,7 @@ class MainViewBloc extends Bloc<MainViewEvent, MainViewState> {
   void _init(InitEvent event, Emitter<MainViewState> emit) async {
     emit(LoadingState());
     try{
-      pokemons = await _getPokemonsUseCase.execute(20);
+      pokemons = await _getPokemonsUseCase.execute(0);
       emit(LoadedState(pokemons: pokemons));
     }catch(e,_){
       emit(ErrorState(errorMessage: e.toString()));

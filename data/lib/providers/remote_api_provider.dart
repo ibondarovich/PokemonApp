@@ -15,23 +15,25 @@ class RemoteApiProvider implements ApiProvider{
   @override
   Future<PokemonDetailedEntity> getPokemonById(int id) async {
     final response = await _dio.get('https://pokeapi.co/api/v2/pokemon/$id/');
-    print(response);
+    //print(response);
     if(response.statusCode != 200) {
       throw Exception("Status code is not 200!");
     }
-    return PokemonDetailedEntity.fromJson(json.decode(response.data));
+    final res = PokemonDetailedEntity.fromJson(json.decode(response.data));
+   
+    return res;
   }
 
   @override
   Future<List<PokemonEntity>> getPokemons(int offset) async{
     final response = await 
         _dio.get('https://pokeapi.co/api/v2/pokemon?offset=$offset&limit=20');
-    print(response);
+   // print(response);
     if(response.statusCode != 200) {
       throw Exception("Status code is not 200!");
     }
-    final result = (response.data as List).map((e) => 
-          PokemonEntity.fromJson(e)).toList();
+    final result = (response.data['results'] as List).map((e) => 
+         PokemonEntity.fromJson(e)).toList();
     return result;
   }
 }
