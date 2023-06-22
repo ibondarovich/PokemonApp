@@ -12,6 +12,6 @@ class FetchPokemonsUseCase implements UseCase<int, List<PokemonModel>>{
 
   @override
   Future<List<PokemonModel>> execute(int input) async {
-    return _pokemonsRepository.getPokemon(input);
+    return _pokemonsRepository.getPokemons(input);
   }
 }
