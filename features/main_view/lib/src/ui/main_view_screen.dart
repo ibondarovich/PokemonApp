@@ -11,6 +11,11 @@ class MainViewScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primarySwatch: Colors.grey,
+        primaryColor: Colors.grey[50],
+      ),
       home: Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -52,8 +57,8 @@ class MainViewScreen extends StatelessWidget{
                   children: [
                     ...List.generate(
                       state.pokemons.length, 
-                      (index) => Text(
-                        '${index + 1} '+ state.pokemons[index].name
+                      (index)=>PokemonCellWidget(
+                        pokemonModel: state.pokemons[index],  
                       )
                     )
                   ],
