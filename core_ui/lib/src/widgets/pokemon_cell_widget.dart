@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 
 class PokemonCellWidget extends StatefulWidget{
   final PokemonModel pokemonModel;
+  final Function() onTap;
   const PokemonCellWidget({
     super.key,
-    required this.pokemonModel
+    required this.pokemonModel,
+    required this.onTap
   });
 
   @override
@@ -16,7 +18,7 @@ class PokemonCellState extends State<PokemonCellWidget>{
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      //onTap: ,
+      onTap: widget.onTap,
       child: Container(
         padding: const EdgeInsets.all(17),
         width: MediaQuery.sizeOf(context).width,

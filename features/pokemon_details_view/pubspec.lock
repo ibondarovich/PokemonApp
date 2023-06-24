@@ -52,21 +52,21 @@ packages:
   core:
     dependency: "direct main"
     description:
-      path: core
+      path: "../../core"
       relative: true
     source: path
     version: "0.0.1"
   core_ui:
-    dependency: transitive
+    dependency: "direct main"
     description:
-      path: core_ui
+      path: "../../core_ui"
       relative: true
     source: path
     version: "0.0.1"
   data:
     dependency: transitive
     description:
-      path: data
+      path: "../../data"
       relative: true
     source: path
     version: "0.0.1"
@@ -79,9 +79,9 @@ packages:
     source: hosted
     version: "5.2.1+1"
   domain:
-    dependency: transitive
+    dependency: "direct main"
     description:
-      path: domain
+      path: "../../domain"
       relative: true
     source: path
     version: "0.0.1"
@@ -151,13 +151,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
-  main_view:
-    dependency: "direct main"
-    description:
-      path: "features/main_view"
-      relative: true
-    source: path
-    version: "0.0.1"
   matcher:
     dependency: transitive
     description:
@@ -198,13 +191,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.3"
-  pokemon_details_view:
-    dependency: transitive
-    description:
-      path: "features/pokemon_details_view"
-      relative: true
-    source: path
-    version: "0.0.1"
   provider:
     dependency: transitive
     description:

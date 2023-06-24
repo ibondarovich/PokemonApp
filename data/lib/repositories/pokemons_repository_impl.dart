@@ -21,8 +21,8 @@ class PokemonsRepositoryImpl implements PokemonsRepository{
   }
 
   @override
-  Future<PokemonDetailedModel> getPokemonById(int id) async {
-    final PokemonDetailedEntity result = await _apiProvider.getPokemonById(id);
+  Future<PokemonDetailedModel> getPokemonById(String url) async {
+    final PokemonDetailedEntity result = await _apiProvider.getPokemonById(url);
     return PokemonDetailedMapper.toModel(result);
   }
 }

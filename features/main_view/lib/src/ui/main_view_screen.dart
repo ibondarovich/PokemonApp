@@ -5,6 +5,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:main_view/src/bloc/bloc.dart';
+import 'package:pokemon_details_view/pokemon_details_view.dart';
 
 
 class MainViewScreen extends StatelessWidget{
@@ -58,7 +59,14 @@ class MainViewScreen extends StatelessWidget{
                     ...List.generate(
                       state.pokemons.length, 
                       (index)=>PokemonCellWidget(
-                        pokemonModel: state.pokemons[index],  
+                        pokemonModel: state.pokemons[index], 
+                        onTap: ()=> Navigator.push(context, 
+                              MaterialPageRoute(
+                                builder: ((context) => PokemonDetailsScreen(
+                                  url: state.pokemons[index].url
+                                ))
+                              )
+                        )
                       )
                     )
                   ],

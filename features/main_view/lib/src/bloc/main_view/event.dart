@@ -4,8 +4,3 @@ part of 'bloc.dart';
 abstract class MainViewEvent {}
 
 class InitEvent extends MainViewEvent {}
-class LoadEvent extends MainViewEvent{
-  final int pokemonId;
-
-  LoadEvent({required this.pokemonId});
-}
