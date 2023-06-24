@@ -16,8 +16,9 @@ class PokemonDetailedEntity{
   factory PokemonDetailedEntity.fromJson(Map<String, dynamic> json){
     return PokemonDetailedEntity(
       name: json['name'], 
-      frontImg: json['front_default'], 
-      types: json['types'], 
+      frontImg: json['sprites']['front_default'], 
+      types: (json['types'] as List<dynamic>).map((e) => 
+              e['type']['name'].toString()).toList(), 
       weight: json['weight'], 
       height: json['height']
     );

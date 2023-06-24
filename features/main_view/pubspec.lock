@@ -191,6 +191,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.3"
+  pokemon_details_view:
+    dependency: "direct main"
+    description:
+      path: "../pokemon_details_view"
+      relative: true
+    source: path
+    version: "0.0.1"
   provider:
     dependency: transitive
     description:

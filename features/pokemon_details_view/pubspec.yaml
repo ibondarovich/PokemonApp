@@ -1,4 +1,4 @@
-name: core_ui
+name: pokemon_details_view
 description: A new Flutter package project.
 version: 0.0.1
 publish_to: none
@@ -12,11 +12,16 @@ dependencies:
   flutter:
     sdk: flutter
   domain:
-    path: ../domain
+    path: ../../domain
+  core:
+    path: ../../core
+  core_ui:
+    path: ../../core_ui
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+
 
 flutter:

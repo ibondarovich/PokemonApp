@@ -2,7 +2,7 @@ import 'package:domain/repositories/pokemons_repository.dart';
 import 'package:domain/usecases/usecase.dart';
 import '../models/pokemon_detailed_model.dart';
 
-class FetchPokemonDetailsUseCase implements UseCase<int, PokemonDetailedModel>{
+class FetchPokemonDetailsUseCase implements UseCase<String, PokemonDetailedModel>{
   final PokemonsRepository _pokemonsRepository;
 
   FetchPokemonDetailsUseCase({
@@ -10,7 +10,7 @@ class FetchPokemonDetailsUseCase implements UseCase<int, PokemonDetailedModel>{
   }): _pokemonsRepository = pokemonsRepository;
 
   @override
-  Future<PokemonDetailedModel> execute(int input) async {
+  Future<PokemonDetailedModel> execute(String input) async {
     return _pokemonsRepository.getPokemonById(input);
   }
 }
