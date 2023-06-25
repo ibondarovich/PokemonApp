@@ -118,8 +118,29 @@ class PokemonDetailsScreen extends StatelessWidget{
             }
             if(state is ErrorState){
               return Center(
-                child: Text(state.errorMessage),
-              );
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                    'Oops! Something goes wrong...\nCheck your internet connection!',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    FloatingActionButton(
+                      onPressed:() async {
+                        BlocProvider.of<PokemonDetailsBloc>(context).
+                                    add(InitEvent(url: url));
+                      },
+                      child: const Icon(Icons.refresh)
+                    )
+                  ],
+                )
+              ); 
             }
             return Container();
           },
