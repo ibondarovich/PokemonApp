@@ -13,4 +13,11 @@ class PokemonEntity{
       url: json['url']
     );
   }
+
+  Map<String, dynamic> toMap(){
+    return {
+      'name' : name,
+      'url' : url
+    };
+  }
 }

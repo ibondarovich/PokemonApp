@@ -8,4 +8,10 @@ abstract class PokemonMapper{
       url: entity.url
     );
   }
+  static PokemonEntity toEntity(PokemonModel model){
+    return PokemonEntity(
+      name: model.name,
+      url: model.url
+    );
+  }
 }
