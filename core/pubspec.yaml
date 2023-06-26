@@ -17,6 +17,8 @@ dependencies:
     path: ../data
   domain:
     path: ../domain
+  sqflite: ^2.2.8+4
+  connectivity_plus: ^4.0.1
 
 dev_dependencies:
   flutter_test:

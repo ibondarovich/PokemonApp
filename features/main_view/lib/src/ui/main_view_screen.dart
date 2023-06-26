@@ -3,6 +3,7 @@ import 'package:core/di/app_di.dart';
 import 'package:core_ui/core_ui.dart';
 
 import 'package:domain/domain.dart';
+import 'package:domain/usecases/get_all_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:main_view/src/bloc/bloc.dart';
 import 'package:pokemon_details_view/pokemon_details_view.dart';
@@ -32,7 +33,9 @@ class MainViewScreen extends StatelessWidget{
         ),
         body: BlocProvider<MainViewBloc>(
           create: (BuildContext context) => MainViewBloc(
-            getPokemonsUseCase: appLocator.get<FetchPokemonsUseCase>()
+            getPokemonsUseCase: appLocator.get<FetchPokemonsUseCase>(),
+            savePokemonsUseCase: appLocator.get<SavePokemonsUseCase>(), 
+            getAllUseCase: appLocator.get<GetAllUseCase>()
           )..add(
             InitEvent(),
           ),
