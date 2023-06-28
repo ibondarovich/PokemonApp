@@ -6,11 +6,14 @@ part 'event.dart';
 part 'state.dart';
 
 class PokemonDetailsBloc extends Bloc<PokemonDetailsEvent, PokemonDetailsState> {
-  final FetchPokemonDetailsUseCase _fetchPokemonDetailsUseCase;
-  late PokemonDetailedModel pokemon;
+  final FetchPokemonDetailsUseCase _fetchPokemonDetailsUseCase; 
+  final SaveOnePokemonsUseCase _saveOnePokemonsUseCase;
+
   PokemonDetailsBloc({
-    required FetchPokemonDetailsUseCase fetchPokemonDetailsUseCase
+    required FetchPokemonDetailsUseCase fetchPokemonDetailsUseCase,
+    required SaveOnePokemonsUseCase saveOnePokemonsUseCase,
   }) : _fetchPokemonDetailsUseCase = fetchPokemonDetailsUseCase,
+      _saveOnePokemonsUseCase = saveOnePokemonsUseCase,
     super(EmptyState()){
       on<InitEvent>(_init);
   }
@@ -18,8 +21,10 @@ class PokemonDetailsBloc extends Bloc<PokemonDetailsEvent, PokemonDetailsState> 
   void _init(InitEvent event, Emitter<PokemonDetailsState> state) async {
     emit(LoadingState());
     try{
-      pokemon = await _fetchPokemonDetailsUseCase.execute(event.url);
-        emit(LoadedState(pokemon: pokemon));
+      PokemonDetailedModel pokemon =
+          await _fetchPokemonDetailsUseCase.execute(event.url);
+      _saveOnePokemonsUseCase.execute(pokemon, event.url);
+      emit(LoadedState(pokemon: pokemon));
     }catch(e,_){
       emit(ErrorState(errorMessage: e.toString()));
     }

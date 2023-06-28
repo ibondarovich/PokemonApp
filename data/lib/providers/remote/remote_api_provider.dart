@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:data/entity/pokemon_detailed_entity.dart';
 import 'package:data/entity/pokemon_entity.dart';
 import 'package:data/providers/remote/api_provider.dart';
@@ -13,6 +15,15 @@ class RemoteApiProvider implements ApiProvider{
   @override
   Future<PokemonDetailedEntity> getPokemonById(String url) async {
     final response = await _dio.get(url);
+    //json['sprites']['front_default']
+    final imgBytes = await _dio.get(response.data['sprites']['front_default'],
+        options: Options(responseType: ResponseType.bytes));
+    response.data['frontImg'] = imgBytes.data;
+    //json['types'] as List<dynamic>).map((e) => 
+       //       e['type']['name'].toString()).toList(), 
+    response.data['types'] = (response.data['types'] as List<dynamic>).map((e) => 
+              e['type']['name'].toString()).toList();
+    //print(response.data['types']);
     if(response.statusCode != 200) {
       throw Exception("Status code is not 200!");
     }

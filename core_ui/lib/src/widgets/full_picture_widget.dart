@@ -1,7 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 
 class FullPictureWidget extends StatelessWidget{
-  final String url;
+  final Uint8List url;
 
   const FullPictureWidget({
     super.key,
@@ -12,7 +14,7 @@ class FullPictureWidget extends StatelessWidget{
     return Scaffold(
       body: GestureDetector(
         child: Center(
-          child: Image.network(
+          child: Image.memory(
             url,
             scale: 0.1,
           )

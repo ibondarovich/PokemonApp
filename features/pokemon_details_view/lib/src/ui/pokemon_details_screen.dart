@@ -7,9 +7,11 @@ import 'package:pokemon_details_view/src/bloc/pokemon_details/bloc.dart';
 
 class PokemonDetailsScreen extends StatelessWidget{
   final String url;
+  final int id;
   const PokemonDetailsScreen({
     super.key,
-    required this.url
+    required this.url,
+    required this.id,
   });
 
   @override
@@ -29,9 +31,10 @@ class PokemonDetailsScreen extends StatelessWidget{
       ),
       body: BlocProvider<PokemonDetailsBloc>(
         create: (context) => PokemonDetailsBloc(
-          fetchPokemonDetailsUseCase: 
-            appLocator.get<FetchPokemonDetailsUseCase>()
-        )..add(InitEvent(url: url)),
+          fetchPokemonDetailsUseCase:
+                      appLocator.get<FetchPokemonDetailsUseCase>(), 
+          saveOnePokemonsUseCase: appLocator.get<SaveOnePokemonsUseCase>(), 
+        )..add(InitEvent(url: url, id: id)),
         child: BlocBuilder<PokemonDetailsBloc, PokemonDetailsState>(
           builder: (BuildContext context, PokemonDetailsState state) {
             if(state is LoadingState){
@@ -60,7 +63,8 @@ class PokemonDetailsScreen extends StatelessWidget{
                         decoration: const BoxDecoration(
                         ),
                         child: GestureDetector(
-                          child: Image.network(
+                          child: //Image.memory(bytes)
+                           Image.memory(
                             state.pokemon.frontImg,
                             scale: 0.3,
                           ),
@@ -121,7 +125,7 @@ class PokemonDetailsScreen extends StatelessWidget{
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                   const Text(
                     'Oops! Something goes wrong...\nCheck your internet connection!',
                       style: TextStyle(
                         fontSize: 22,
@@ -134,7 +138,7 @@ class PokemonDetailsScreen extends StatelessWidget{
                     FloatingActionButton(
                       onPressed:() async {
                         BlocProvider.of<PokemonDetailsBloc>(context).
-                                    add(InitEvent(url: url));
+                                    add(InitEvent(url: url, id: id));
                       },
                       child: const Icon(Icons.refresh)
                     )
