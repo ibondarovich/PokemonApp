@@ -65,10 +65,5 @@ class DataDI{
         pokemonsRepository: appLocator.get<PokemonsRepository>()
       )
     );
-    // appLocator.registerLazySingleton<GetAllUseCase>(
-    //   () => GetAllUseCase(
-    //     pokemonsRepository: appLocator.get<PokemonsRepository>()
-    //   )
-    // );
   }
 }
