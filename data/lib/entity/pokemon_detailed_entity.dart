@@ -1,6 +1,10 @@
+import 'dart:typed_data';
+
+import 'package:data/data.dart';
+
 class PokemonDetailedEntity{
   final String name;
-  final String frontImg;
+  final Uint8List frontImg;
   final List<String> types;
   final int weight;
   final int height;
@@ -16,11 +20,21 @@ class PokemonDetailedEntity{
   factory PokemonDetailedEntity.fromJson(Map<String, dynamic> json){
     return PokemonDetailedEntity(
       name: json['name'], 
-      frontImg: json['sprites']['front_default'], 
-      types: (json['types'] as List<dynamic>).map((e) => 
-              e['type']['name'].toString()).toList(), 
+      frontImg: json['frontImg'], 
+      types: json['types'],
+      //as List<dynamic>).map((e) => 
+       //       e['type']['name'].toString()).toList(), 
       weight: json['weight'], 
       height: json['height']
     );
+  }
+  Map<String, dynamic> toJson(){
+    return{
+      'name': name, 
+      'frontImg': frontImg, 
+      'types': types, 
+      'weight': weight, 
+      'height': height,
+    };
   }
 }

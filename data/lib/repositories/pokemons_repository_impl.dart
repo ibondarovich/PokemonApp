@@ -24,31 +24,36 @@ class PokemonsRepositoryImpl implements PokemonsRepository{
 
   @override
   Future<List<PokemonModel>> getPokemons(int offset) async {
+    final List<PokemonEntity> entities;
     if (await _networkInfo.isConnected){
-      final List<PokemonEntity> result = await _apiProvider.getPokemons(offset);
-      return result.map((PokemonEntity e) => PokemonMapper.toModel(e)).toList();
+      entities = await _apiProvider.getPokemons(offset);
     } else {
-      final List<PokemonEntity> result = await _localProvider.getAll();
-      return result.map((PokemonEntity e) => PokemonMapper.toModel(e)).toList();
+      entities = await _localProvider.getAll();
     }
+    return entities.map((PokemonEntity e) => PokemonMapper.toModel(e)).toList();
   }
 
   @override
   Future<PokemonDetailedModel> getPokemonById(String url) async {
-    final PokemonDetailedEntity result = await _apiProvider.getPokemonById(url);
-    return PokemonDetailedMapper.toModel(result);
+    final PokemonDetailedEntity entity;
+    if (await _networkInfo.isConnected){
+      entity = await _apiProvider.getPokemonById(url);
+    } else {
+      entity = await _localProvider.getOne(url);
+    }
+    return PokemonDetailedMapper.toModel(entity);
   }
   
   @override
-  Future<void> savePokemons(List<PokemonModel> model) async {
-    List<PokemonEntity> entities = model.map((e) => 
+  Future<void> savePokemons(List<PokemonModel> models) async {
+    final List<PokemonEntity> entities = models.map((e) => 
                               PokemonMapper.toEntity(e)).toList();
     await _localProvider.saveAll(entities);
   }
   
   @override
-  Future<List<PokemonModel>> getAll() async {
-    final response = await _localProvider.getAll();
-    return response.map((e) => PokemonMapper.toModel(e)).toList();
+  Future<void> saveOnePokemon(PokemonDetailedModel model, String url) async {
+    final PokemonDetailedEntity entity = PokemonDetailedMapper.toEntity(model);
+    await _localProvider.saveOne(entity, url);
   }
 }

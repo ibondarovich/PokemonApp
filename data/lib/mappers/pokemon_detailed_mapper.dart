@@ -11,4 +11,14 @@ abstract class PokemonDetailedMapper{
       height: entity.height
     );
   }
+
+  static PokemonDetailedEntity toEntity(PokemonDetailedModel model){
+    return PokemonDetailedEntity(
+      name: model.name, 
+      frontImg: model.frontImg, 
+      types: model.types, 
+      weight: model.weight, 
+      height: model.height
+    );
+  }
 }

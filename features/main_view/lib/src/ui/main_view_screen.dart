@@ -35,7 +35,7 @@ class MainViewScreen extends StatelessWidget{
           create: (BuildContext context) => MainViewBloc(
             getPokemonsUseCase: appLocator.get<FetchPokemonsUseCase>(),
             savePokemonsUseCase: appLocator.get<SavePokemonsUseCase>(), 
-            getAllUseCase: appLocator.get<GetAllUseCase>()
+            //getAllUseCase: appLocator.get<GetAllUseCase>()
           )..add(
             InitEvent(),
           ),
@@ -85,7 +85,8 @@ class MainViewScreen extends StatelessWidget{
                           onTap: ()=> Navigator.push(context, 
                                 MaterialPageRoute(
                                   builder: ((context) => PokemonDetailsScreen(
-                                    url: state.pokemons[index].url
+                                    url: state.pokemons[index].url,
+                                    id: index,
                                   ))
                                 )
                           )
