@@ -1,4 +1,4 @@
 library core;
 
-export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:sqflite/sqflite.dart';
+export 'package:flutter_riverpod/flutter_riverpod.dart';
