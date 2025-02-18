@@ -17,6 +17,9 @@ class FullPictureWidget extends StatelessWidget{
           child: Image.memory(
             url,
             scale: 0.1,
+            errorBuilder: ((context, error, _) {
+              return const Icon(Icons.error);
+            }),
           )
         ),
         onTap:() => Navigator.pop(context),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class PokemonCellWidget extends StatefulWidget{
   final PokemonModel pokemonModel;
   final Function() onTap;
+
   const PokemonCellWidget({
     super.key,
     required this.pokemonModel,

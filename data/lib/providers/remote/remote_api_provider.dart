@@ -15,14 +15,13 @@ class RemoteApiProvider implements ApiProvider{
   @override
   Future<PokemonDetailedEntity> getPokemonById(String url) async {
     final response = await _dio.get(url);
+
     final imgBytes = await _dio.get(response.data['sprites']['front_default'],
         options: Options(responseType: ResponseType.bytes));
     response.data['frontImg'] = imgBytes.data;
     response.data['types'] = (response.data['types'] as List<dynamic>).map((e) => 
               e['type']['name'].toString()).toList();
-    if(response.statusCode != 200) {
-      throw Exception("Status code is not 200!");
-    }
+
     final res = PokemonDetailedEntity.fromJson(response.data);
     return res;
   }
@@ -31,9 +30,7 @@ class RemoteApiProvider implements ApiProvider{
   Future<List<PokemonEntity>> getPokemons(int offset) async{
     final response = await 
         _dio.get('https://pokeapi.co/api/v2/pokemon?offset=$offset&limit=20');
-    if(response.statusCode != 200) {
-      throw Exception("Status code is not 200!");
-    }
+
     final result = (response.data['results'] as List).map((e) => 
          PokemonEntity.fromJson(e)).toList();
     return result;

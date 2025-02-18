@@ -13,11 +13,18 @@ dependencies:
     path: ./core
   main_view:
     path: ./features/main_view
+  pokemon_details_view:
+    path: ./features/pokemon_details_view
+  core_ui:
+    path: ./core_ui
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  build_runner: ^2.4.11
+  integration_test:
+    sdk: flutter
 
 flutter:
   uses-material-design: true

@@ -1,6 +1,8 @@
 import 'dart:typed_data';
 
-class PokemonDetailedModel{
+import 'package:equatable/equatable.dart';
+
+class PokemonDetailedModel extends Equatable{
   final int? id;
   final String name;
   final Uint8List frontImg;
@@ -8,7 +10,7 @@ class PokemonDetailedModel{
   final int weight;
   final int height;
 
-  PokemonDetailedModel({
+  const PokemonDetailedModel({
     this.id,
     required this.name,
     required this.frontImg,
@@ -16,4 +18,7 @@ class PokemonDetailedModel{
     required this.weight,
     required this.height
   });
+
+  @override
+  List<Object?> get props => [id, name, frontImg, types, weight, height];
 }

@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:domain/domain.dart';
-import 'package:domain/usecases/get_all_usecase.dart';
-import 'package:domain/usecases/usecase.dart';
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 part 'event.dart';
@@ -18,6 +17,8 @@ class MainViewBloc extends Bloc<MainViewEvent, MainViewState> {
       _savePokemonsUseCase = savePokemonsUseCase,
         super(EmptyState()) {
     on<InitEvent>(_init);
+
+    add(InitEvent());
   }
 
   void _init(InitEvent event, Emitter<MainViewState> emit) async {
@@ -25,6 +26,7 @@ class MainViewBloc extends Bloc<MainViewEvent, MainViewState> {
     try{
       final List<PokemonModel> pokemons = await _getPokemonsUseCase.execute(0);
       await _savePokemonsUseCase.execute(pokemons);
+
       emit(LoadedState(pokemons: pokemons));
     }catch(e,_){
       emit(ErrorState(errorMessage: e.toString()));

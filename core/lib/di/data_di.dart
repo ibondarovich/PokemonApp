@@ -8,7 +8,6 @@ import 'package:data/providers/local/local_provider.dart';
 import 'package:data/providers/remote/remote_api_provider.dart';
 import 'package:data/repositories/pokemons_repository_impl.dart';
 import 'package:domain/domain.dart';
-import 'package:domain/usecases/get_all_usecase.dart';
 
 final DataDI dataDI = DataDI();
 
@@ -30,7 +29,7 @@ class DataDI{
   }
   
   void _initLocalSource(){
-    appLocator.registerLazySingleton<LocalProvider>(
+    appLocator.registerLazySingleton<SqlLiteProvider>(
       () => SqlLiteProvider()
     );
   }
@@ -39,7 +38,7 @@ class DataDI{
     appLocator.registerLazySingleton<PokemonsRepository>(
       () => PokemonsRepositoryImpl(
         apiProvider: appLocator.get<ApiProvider>(),
-        localprovider: appLocator.get<LocalProvider>(), 
+        localprovider: appLocator.get<SqlLiteProvider>(),
         networkInfo: appLocator.get<NetworkInfo>()
       )
     );

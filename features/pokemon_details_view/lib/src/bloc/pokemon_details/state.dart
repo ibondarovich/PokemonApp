@@ -1,6 +1,5 @@
 part of 'bloc.dart';
 
-@immutable
 abstract class PokemonDetailsState {}
 
 class EmptyState extends PokemonDetailsState {}

@@ -1,6 +1,5 @@
-import 'package:bloc/bloc.dart';
+import 'package:core/core.dart';
 import 'package:domain/domain.dart';
-import 'package:meta/meta.dart';
 
 part 'event.dart';
 part 'state.dart';
