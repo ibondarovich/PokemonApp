@@ -22,8 +22,6 @@ class PokemonDetailedEntity{
       name: json['name'], 
       frontImg: json['frontImg'], 
       types: json['types'],
-      //as List<dynamic>).map((e) => 
-       //       e['type']['name'].toString()).toList(), 
       weight: json['weight'], 
       height: json['height']
     );
