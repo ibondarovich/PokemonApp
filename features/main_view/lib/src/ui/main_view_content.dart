@@ -53,7 +53,6 @@ class MainViewContent extends ConsumerWidget {
                 MaterialPageRoute(
                   builder: ((context) => PokemonDetailsScreen(
                         url: state.pokemons[index].url,
-                        id: index,
                       )),
                 ),
               ),

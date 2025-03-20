@@ -1,13 +1,13 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:pokemon_details_view/src/ui/pokemon_detailed_content.dart';
 
 class PokemonDetailsScreen extends StatelessWidget {
   final String url;
-  final int id;
+
   const PokemonDetailsScreen({
     super.key,
     required this.url,
-    required this.id,
   });
 
   @override
@@ -22,7 +22,9 @@ class PokemonDetailsScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         centerTitle: true,
       ),
-      body: const PokemonDetailedContent(),
+      body: PokemonDetailedContent(
+        url: url,
+      ),
     );
   }
 }

@@ -11,5 +11,5 @@ final StateNotifierProvider<MainViewNotifier, MainViewState> mainViewProvider =
     StateNotifierProvider((ref) {
   return MainViewNotifier(
     fetchPokemonsUseCase: appLocator.get<FetchPokemonsUseCase>(),
-  );
+  )..init();
 });

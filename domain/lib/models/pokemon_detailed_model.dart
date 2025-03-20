@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-class PokemonDetailedModel{
+class PokemonDetailedModel {
   final int? id;
   final String name;
   final Uint8List frontImg;
@@ -14,6 +14,17 @@ class PokemonDetailedModel{
     required this.frontImg,
     required this.types,
     required this.weight,
-    required this.height
+    required this.height,
   });
+
+  factory PokemonDetailedModel.empty() {
+    return PokemonDetailedModel(
+      id: null,
+      name: '',
+      frontImg: Uint8List(0),
+      types: [],
+      weight: 0,
+      height: 0,
+    );
+  }
 }
