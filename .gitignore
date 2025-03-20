@@ -31,6 +31,10 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+**/*.lock
+**/*.gm.dart
+**/*.g.dart
+**/*.gr.dart
 
 # Symbolication related
 app.*.symbols
