@@ -1,0 +1,30 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "pokemonapp-52074",
+          "appId": "1:746255070875:android:c0d75d9680946e01b5b83e",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "pokemonapp-52074",
+          "appId": "1:746255070875:ios:54db3dd2256b3437b5b83e",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "pokemonapp-52074",
+          "configurations": {
+            "android": "1:746255070875:android:c0d75d9680946e01b5b83e",
+            "ios": "1:746255070875:ios:54db3dd2256b3437b5b83e"
+          }
+        }
+      }
+    }
+  }
+}
