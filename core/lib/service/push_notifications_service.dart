@@ -32,7 +32,7 @@ class PushNotificationsService {
     await _setupMessagingHandlers();
 
     final String? token = await firebaseMessaging.getToken();
-    print('token: $token');
+    print('userFCMToken: $token');
   }
 
   Future<void> _requestPermissions() async {

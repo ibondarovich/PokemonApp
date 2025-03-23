@@ -5,23 +5,34 @@ import 'package:googleapis_auth/googleapis_auth.dart' as auth;
 import 'package:googleapis/servicecontrol/v1.dart' as servicecontrol;
 import 'package:googleapis_auth/auth_io.dart';
 
-const String projectId = 'pokemonapp-52074'; // Replace with your Firebase project ID
-const String serviceAccountPath = 'service_account.json'; // Path to your service account key file
+const String projectId =
+    'pokemonapp-52074'; // Replace with your Firebase project ID
+const String serviceAccountFileName =
+    'service_account.json'; // Path to your service account key file
 
 ///This file demonstrates the logic of sending push notifications (this should be implemented on the backend)
 void main() async {
-  const userFCMToken = "fLpvWUuLRMOzrTiem063Nd:APA91bGW9I5GtU8cIUE69XYrTzINt_z0pMESTOzHh9D1_bunWA2r1hVQ9qf5KlwX0BhaQcB6nitnitSsuxebOxV165QikVIMG307AjANXX13Opnva7-8Seg"; // Replace with the actual FCM token
+
+  // Replace with the actual FCM token
+  const userFCMToken =
+      "fHT9UzsqTM-dGHte2zwuse:APA91bHpsCOKbi-5Cx-QjwaySfRAGH7Vibt12DZ5YMzI-1DWwMJ1O31zinqjTj0d5SVSSbhi2oKPrg7N4YCj8WstXQd5L-6Jm3tiLAGlUcWLUiTwI3mJsKU";
+
   await sendPushNotification(userFCMToken);
 }
 
 Future<String> getAccessToken() async {
   // Load service account credentials from JSON file
-  final serviceAccount = File(serviceAccountPath).readAsStringSync();
+  Directory current = Directory.current;
+  String path =
+      '${current.path}/lib/service/push_server/$serviceAccountFileName';
+  final serviceAccount = File(path).readAsStringSync();
   final Map<String, dynamic> credentials = json.decode(serviceAccount);
 
   final client = await clientViaServiceAccount(
     auth.ServiceAccountCredentials.fromJson(credentials),
-    ['https://www.googleapis.com/auth/firebase.messaging'], // Required scope for FCM
+    [
+      'https://www.googleapis.com/auth/firebase.messaging'
+    ], // Required scope for FCM
   );
 
   return client.credentials.accessToken.data;
