@@ -2,6 +2,7 @@ import 'dart:io';
 
 void main() async {
   await checkAndTestModules(['domain', 'data', 'features']);
+  await runIntegrationTest();
 }
 
 Future<void> checkAndTestModules(List<String> modules) async {
@@ -9,7 +10,8 @@ Future<void> checkAndTestModules(List<String> modules) async {
 
   // Ensure the script is executed in the root of a Flutter project
   if (!(await File('${currentDirectory.path}/pubspec.yaml').exists())) {
-    print('Error: Not in a Flutter project directory. Make sure to run this script in the root of the project.');
+    print(
+        'Error: Not in a Flutter project directory. Make sure to run this script in the root of the project.');
     return;
   }
 
@@ -25,14 +27,38 @@ Future<void> checkAndTestModules(List<String> modules) async {
   }
 }
 
+Future<void> runIntegrationTest() async {
+  final result = await Process.run(
+    'flutter',
+    ['test', 'integration_test'],
+    workingDirectory: './',
+    runInShell: true,
+  );
+
+  if (result.exitCode != 0) {
+    print(result.stderr);
+    exit(result.exitCode);
+  } else {
+    print(result.stdout);
+  }
+}
+
 Future<void> _runTestsRecursively(Directory directory) async {
   // Exclude directories like .dart_tool, build, etc.
-  const excludedDirectories = {'.dart_tool', 'build', '.idea', '.vscode', '.git', 'generated'};
+  const excludedDirectories = {
+    '.dart_tool',
+    'build',
+    '.idea',
+    '.vscode',
+    '.git',
+    'generated'
+  };
 
   final subDirectories = directory
       .listSync(recursive: false)
       .whereType<Directory>()
-      .where((dir) => !excludedDirectories.contains(dir.path.split(Platform.pathSeparator).last))
+      .where((dir) => !excludedDirectories
+          .contains(dir.path.split(Platform.pathSeparator).last))
       .toList();
 
   // Check if the current directory contains tests
@@ -47,6 +73,12 @@ Future<void> _runTestsRecursively(Directory directory) async {
     );
 
     if (result.exitCode == 0) {
+      await Process.run(
+        'genhtml',
+        ['coverage/lcov.info', '--output=coverage/report'],
+        workingDirectory: directory.path,
+        runInShell: true,
+      );
       print('✅ Tests passed for: ${directory.path}');
     } else {
       print('❌ Tests failed for: ${directory.path}');
