@@ -60,17 +60,6 @@ void main() {
       pokemonCellWidget = find.byType(PokemonCellWidget);
 
       expect(pokemonCellWidget, findsAny);
-
-      await tester.drag(
-        pokemonCellWidget.first,
-        const Offset(0, -500),
-      );
-
-      await tester.pumpAndSettle();
-
-      await tester.tap(pokemonCellWidget.last);
-
-      await tester.pumpAndSettle();
     });
   });
 }

@@ -40,6 +40,13 @@ allDirs
     dart run build_runner build --delete-conflicting-outputs
 )
 
+# Generate domain layer files
+(
+    cd "domain" || exit
+    echo_styled "Generating domain layer files in domain" 33
+    dart run build_runner build --delete-conflicting-outputs
+)
+
 # Generate feature layer files
 (
     cd "features" || exit

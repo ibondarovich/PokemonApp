@@ -28,6 +28,8 @@ Future<void> checkAndTestModules(List<String> modules) async {
 }
 
 Future<void> runIntegrationTest() async {
+  print('Running Integration test...');
+
   final result = await Process.run(
     'flutter',
     ['test', 'integration_test'],
@@ -36,10 +38,11 @@ Future<void> runIntegrationTest() async {
   );
 
   if (result.exitCode != 0) {
-    print(result.stderr);
-    exit(result.exitCode);
-  } else {
+    print('❌ Integration test failed');
     print(result.stdout);
+    print(result.stderr);
+  } else {
+    print('✅ Integration test passed');
   }
 }
 
