@@ -8,67 +8,60 @@ import 'package:data/providers/local/local_provider.dart';
 import 'package:data/providers/remote/remote_api_provider.dart';
 import 'package:data/repositories/pokemons_repository_impl.dart';
 import 'package:domain/domain.dart';
-import 'package:domain/usecases/get_all_usecase.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+import '../service/push_notifications_service.dart';
 
 final DataDI dataDI = DataDI();
 
-class DataDI{
-  Future<void> initDependencies() async{
+class DataDI {
+  Future<void> initDependencies() async {
+   // _initServices();
     _initApi();
     _initLocalSource();
     _initPokemons();
   }
 
-  void _initApi(){
+  void _initApi() {
     appLocator.registerLazySingleton<ApiProvider>(
-      () => RemoteApiProvider(dio: Dio()));
+        () => RemoteApiProvider(dio: Dio()));
     appLocator.registerLazySingleton<NetworkInfo>(
-      () => NetworkInfoImpl(
-        connectivity: Connectivity()
-      )
-    );
-  }
-  
-  void _initLocalSource(){
-    appLocator.registerLazySingleton<LocalProvider>(
-      () => SqlLiteProvider()
-    );
+        () => NetworkInfoImpl(connectivity: Connectivity()));
   }
 
-  void _initPokemons(){
-    appLocator.registerLazySingleton<PokemonsRepository>(
-      () => PokemonsRepositoryImpl(
-        apiProvider: appLocator.get<ApiProvider>(),
-        localprovider: appLocator.get<LocalProvider>(), 
-        networkInfo: appLocator.get<NetworkInfo>()
-      )
-    );
-
-    appLocator.registerLazySingleton<FetchPokemonsUseCase>(
-      () => FetchPokemonsUseCase(
-        pokemonsRepository: appLocator.get<PokemonsRepository>()
-      )
-    );
-
-    appLocator.registerLazySingleton<FetchPokemonDetailsUseCase>(
-      () => FetchPokemonDetailsUseCase(
-        pokemonsRepository: appLocator.get<PokemonsRepository>()
-      )
-    );
-    appLocator.registerLazySingleton<SavePokemonsUseCase>(
-      () => SavePokemonsUseCase(
-        pokemonsRepository: appLocator.get<PokemonsRepository>()
-      )
-    );
-    appLocator.registerLazySingleton<SaveOnePokemonsUseCase>(
-      () => SaveOnePokemonsUseCase(
-        pokemonsRepository: appLocator.get<PokemonsRepository>()
-      )
-    );
-    // appLocator.registerLazySingleton<GetAllUseCase>(
-    //   () => GetAllUseCase(
-    //     pokemonsRepository: appLocator.get<PokemonsRepository>()
-    //   )
-    // );
+  void _initLocalSource() {
+    appLocator.registerLazySingleton<LocalProvider>(() => SqlLiteProvider());
   }
+
+  void _initPokemons() {
+    appLocator.registerLazySingleton<PokemonsRepository>(() =>
+        PokemonsRepositoryImpl(
+            apiProvider: appLocator.get<ApiProvider>(),
+            localprovider: appLocator.get<LocalProvider>(),
+            networkInfo: appLocator.get<NetworkInfo>()));
+
+    appLocator.registerLazySingleton<FetchPokemonsUseCase>(() =>
+        FetchPokemonsUseCase(
+            pokemonsRepository: appLocator.get<PokemonsRepository>()));
+
+    appLocator.registerLazySingleton<FetchPokemonDetailsUseCase>(() =>
+        FetchPokemonDetailsUseCase(
+            pokemonsRepository: appLocator.get<PokemonsRepository>()));
+    appLocator.registerLazySingleton<SavePokemonsUseCase>(() =>
+        SavePokemonsUseCase(
+            pokemonsRepository: appLocator.get<PokemonsRepository>()));
+    appLocator.registerLazySingleton<SaveOnePokemonsUseCase>(() =>
+        SaveOnePokemonsUseCase(
+            pokemonsRepository: appLocator.get<PokemonsRepository>()));
+  }
+
+  // void _initServices() {
+  //   appLocator.registerLazySingleton<PushNotificationsService>(
+  //     () => PushNotificationsService(
+  //       firebaseMessaging: FirebaseMessaging.instance,
+  //       flutterLocalNotificationsPlugin: FlutterLocalNotificationsPlugin(),
+  //     ),
+  //   );
+  // }
 }
