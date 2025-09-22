@@ -6,33 +6,34 @@ import 'package:data/entity/pokemon_entity.dart';
 import 'package:path/path.dart';
 import 'local_provider.dart';
 
-class SqlLiteProvider implements LocalProvider{
+class SqlLiteProvider implements LocalProvider {
   Future<Database> initPokemons() async {
     String path = await getDatabasesPath();
-    
+
     return openDatabase(
       join(path, 'database.db'),
       onCreate: (database, version) async {
-         await database.execute( 
-           """CREATE TABLE Pokemons(id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        await database.execute(
+          """CREATE TABLE Pokemons(id INTEGER PRIMARY KEY AUTOINCREMENT, 
               name TEXT, url TEXT)""",
-      );
-     },
-     version: 1,
+        );
+      },
+      version: 1,
     );
   }
-   Future<Database> initDetailedPokemons() async {
+
+  Future<Database> initDetailedPokemons() async {
     String path = await getDatabasesPath();
-    
+
     return openDatabase(
       join(path, 'detailedPokemons.db'),
       onCreate: (database, version) async {
-         await database.execute( 
-           """CREATE TABLE DetailedPokemons(url TEXT PRIMARY KEY, 
+        await database.execute(
+          """CREATE TABLE DetailedPokemons(url TEXT PRIMARY KEY, 
               name TEXT, frontImg BLOB, weight INT, height INT, types TEXT)""",
-      );
-     },
-     version: 1,
+        );
+      },
+      version: 1,
     );
   }
 
@@ -40,8 +41,7 @@ class SqlLiteProvider implements LocalProvider{
   Future<List<PokemonEntity>> getAll() async {
     final Database db = await initPokemons();
     final res = await db.query('Pokemons');
-    final result = res.map((e) => 
-         PokemonEntity.fromJson(e)).toList();
+    final result = res.map((e) => PokemonEntity.fromJson(e)).toList();
     return result;
   }
 
@@ -50,7 +50,7 @@ class SqlLiteProvider implements LocalProvider{
     final Database db = await initDetailedPokemons();
     final response =
         await db.query('detailedPokemons', where: 'url = ?', whereArgs: [url]);
-    Map<String, Object?> temp ={};
+    Map<String, Object?> temp = {};
     temp.addAll(response.first);
     temp['types'] = (temp['types'] as String).split('_');
     final result = PokemonDetailedEntity.fromJson(temp);
@@ -62,26 +62,27 @@ class SqlLiteProvider implements LocalProvider{
     int result = 0;
     final Database db = await initPokemons();
     final res = await db.query('Pokemons');
-    if(res.isEmpty){
+    if (res.isEmpty) {
       Map<String, dynamic> map = {};
       for (var val in entities) {
         Map<String, dynamic> entity = val.toMap();
         await db.insert('Pokemons', entity);
       }
       final res = await db.query('Pokemons');
-    } 
+    }
   }
-  
+
   @override
   Future<void> saveOne(PokemonDetailedEntity entity, String url) async {
     final Database db = await initDetailedPokemons();
-    final res = await db.query('DetailedPokemons', where: 'url = ?', whereArgs: [url]);
-    if(res.isEmpty){
+    final res =
+        await db.query('DetailedPokemons', where: 'url = ?', whereArgs: [url]);
+    if (res.isEmpty) {
       final Map<String, dynamic> json = {'url': url};
       json.addAll(entity.toJson());
       json['frontImg'] = json['frontImg'];
       json['types'] = (json['types'] as List).join('_');
       await db.insert('DetailedPokemons', json);
-    } 
+    }
   }
 }
