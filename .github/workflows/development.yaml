@@ -28,7 +28,7 @@ jobs:
               run: flutter analyze
               
             - name: Run tests with coverage
-              run: dart run run_tests_with_coverage.dart
+              run: flutter run run_tests_with_coverage.dart
     
     android:
         name: Build Android
