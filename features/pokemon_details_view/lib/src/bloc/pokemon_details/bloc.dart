@@ -17,7 +17,7 @@ class PokemonDetailsBloc extends Bloc<PokemonDetailsEvent, PokemonDetailsState> 
       on<InitEvent>(_init);
   }
 
-  void _init(InitEvent event, Emitter<PokemonDetailsState> state) async {
+  void _init(InitEvent event, Emitter<PokemonDetailsState> emit) async {
     emit(LoadingState());
     try{
       PokemonDetailedModel pokemon =
