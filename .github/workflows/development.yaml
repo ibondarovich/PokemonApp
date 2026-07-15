@@ -15,7 +15,7 @@ jobs:
             - name: Setup Flutter
               uses: subosito/flutter-action@v2
               with:
-                flutter-version: "3.35.0"
+                flutter-version: "3.32.0"
                 cache: true
             
             - name: Install dependencies
@@ -39,7 +39,7 @@ jobs:
             - name: Setup Flutter
               uses: subosito/flutter-action@v2
               with:
-                flutter-version: "3.35.0"
+                flutter-version: "3.32.0"
                 cache: true
 
               
@@ -71,7 +71,7 @@ jobs:
           - name: Setup Flutter
             uses: subosito/flutter-action@v2
             with:
-              flutter-version: "3.35.0"
+              flutter-version: "3.32.0"
               cache: true
 
 
@@ -93,6 +93,3 @@ jobs:
             with:
               name: ios-release
               path: build/ios/iphoneos
-
-            
-
