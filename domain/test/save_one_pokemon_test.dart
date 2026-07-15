@@ -17,7 +17,7 @@ void main() {
     id: 1,
     name: '',
     frontImg: Uint8List(0),
-    types: [],
+    types: const [],
     weight: 1,
     height: 1,
   );

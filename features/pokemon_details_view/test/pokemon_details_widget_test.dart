@@ -33,7 +33,7 @@ void main() {
       name: 'test',
       weight: 1,
       height: 1,
-      types: ['test'],
+      types: const ['test'],
       frontImg: Uint8List(0),
     );
 

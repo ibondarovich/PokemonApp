@@ -1,11 +1,9 @@
 import 'package:core/core.dart';
 import 'package:core/di/app_di.dart';
-import 'package:core_ui/core_ui.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:pokemon_details_view/src/bloc/pokemon_details/bloc.dart';
 
-import 'pokemon_details_content.dart';
 import 'pokemon_details_form.dart';
 
 class PokemonDetailsScreen extends StatelessWidget {

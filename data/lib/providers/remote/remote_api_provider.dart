@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:data/entity/pokemon_detailed_entity.dart';
 import 'package:data/entity/pokemon_entity.dart';
 import 'package:data/providers/remote/api_provider.dart';

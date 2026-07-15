@@ -11,7 +11,7 @@ import 'save_pokemons_test.mocks.dart';
   MockSpec<PokemonModel>(),
 ])
 void main() {
-  final PokemonModel pokemonModel = PokemonModel(
+  const PokemonModel pokemonModel = PokemonModel(
     name: '',
     url: '',
   );

@@ -4,7 +4,6 @@ import 'package:core/network/network_info.dart';
 import 'package:core/network/network_info_impl.dart';
 import 'package:data/data.dart';
 import 'package:data/providers/local/db_provider.dart';
-import 'package:data/providers/local/local_provider.dart';
 import 'package:data/providers/remote/remote_api_provider.dart';
 import 'package:data/repositories/pokemons_repository_impl.dart';
 import 'package:domain/domain.dart';

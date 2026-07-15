@@ -10,22 +10,25 @@ jobs:
         
         steps:
             - name: Checkouut
-              uses: actions/checkput@4
+              uses: actions/checkout@v4
             
             - name: Setup Flutter
               uses: subosito/flutter-action@v2
               with:
-                flutter-version: "3.35.0"
+                flutter-version: "3.32.0"
                 cache: true
             
             - name: Install dependencies
               run: flutter pub get
+
+            - name: Run prebuild script
+              run: bash ./fast_prebuild_script_mac.sh
               
             - name: Analyze
               run: flutter analyze
               
-            - name: Tests
-              run: flutter test
+            - name: Run tests with coverage
+              run: dart run run_tests_with_coverage.dart
     
     android:
         name: Build Android
@@ -34,12 +37,12 @@ jobs:
         
         steps:
             - name: Checkouut
-              uses: actions/checkput@4
+              uses: actions/checkout@v4
             
             - name: Setup Flutter
               uses: subosito/flutter-action@v2
               with:
-                flutter-version: "3.35.0"
+                flutter-version: "3.32.0"
                 cache: true
 
               
@@ -58,7 +61,7 @@ jobs:
     ios:
 
         name: Build iOS
-        needs: analyze_test
+        needs: analyze_tests
         runs-on: macos-latest
 
 
@@ -71,7 +74,7 @@ jobs:
           - name: Setup Flutter
             uses: subosito/flutter-action@v2
             with:
-              flutter-version: "3.35.0"
+              flutter-version: "3.32.0"
               cache: true
 
 
@@ -93,6 +96,3 @@ jobs:
             with:
               name: ios-release
               path: build/ios/iphoneos
-
-            
-

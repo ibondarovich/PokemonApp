@@ -6,8 +6,6 @@ import 'package:data/mappers/pokemon_mapper.dart';
 import 'package:data/providers/local/local_provider.dart';
 import 'package:data/providers/remote/api_provider.dart';
 import 'package:domain/domain.dart';
-import 'package:domain/models/pokemon_detailed_model.dart';
-import 'package:domain/models/pokemon_model.dart';
 
 class PokemonsRepositoryImpl implements PokemonsRepository{
   final ApiProvider _apiProvider;

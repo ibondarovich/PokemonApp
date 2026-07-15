@@ -1,14 +1,10 @@
 import 'dart:typed_data';
 
-import 'package:core/core.dart';
 import 'package:core/di/app_di.dart';
 import 'package:core/di/data_di.dart';
-import 'package:data/data.dart';
 import 'package:data/entity/pokemon_detailed_entity.dart';
 import 'package:data/entity/pokemon_entity.dart';
 import 'package:data/providers/local/db_provider.dart';
-import 'package:data/providers/local/local_provider.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -24,9 +20,7 @@ void main() {
   late MockSqlLiteProvider mockSqlLiteProvider;
   late SqlLiteProvider sqlLiteProvider;
   late MockDatabase mockDatabase;
-  late Database database;
   late PokemonDetailedEntity pokemonDetailedEntity;
-  late PokemonEntity pokemonEntity;
   const String url = 'https://pokeapi.co/api/v2/pokemon/ditto';
 
   setUpAll(() async {
@@ -50,7 +44,6 @@ void main() {
       types: [],
     );
 
-    pokemonEntity = PokemonEntity(name: 'name', url: url);
   });
 
   group('DbProvider', () {

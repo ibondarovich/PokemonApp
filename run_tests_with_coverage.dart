@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 
 void main() async {
@@ -12,6 +14,7 @@ Future<void> checkAndTestModules(List<String> modules) async {
   if (!(await File('${currentDirectory.path}/pubspec.yaml').exists())) {
     print(
         'Error: Not in a Flutter project directory. Make sure to run this script in the root of the project.');
+
     return;
   }
 
@@ -39,7 +42,9 @@ Future<void> runIntegrationTest() async {
 
   if (result.exitCode != 0) {
     print('❌ Integration test failed');
+
     print(result.stdout);
+
     print(result.stderr);
   } else {
     print('✅ Integration test passed');

@@ -2,6 +2,7 @@ import 'package:core/core.dart';
 import 'package:core/di/data_di.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:domain/domain.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:main_view/src/bloc/bloc.dart';
@@ -23,7 +24,7 @@ void main() {
   late MockMainViewBloc mainViewBlocMock;
 
   setUpAll(() async {
-    pokemonModel = PokemonModel(
+    pokemonModel = const PokemonModel(
       url: 'url',
       name: 'test',
     );
@@ -32,7 +33,9 @@ void main() {
       home: Scaffold(
         body: MainViewContent(
           onTap: () {
-            print('Tap');
+            if (kDebugMode) {
+              print('Tap');
+            }
           },
           pokemons: [pokemonModel],
         ),
@@ -43,7 +46,9 @@ void main() {
       home: Scaffold(
         body: ErrorContent(
           onTap: () {
-            print('Tap');
+            if (kDebugMode) {
+              print('Tap');
+            }
           },
         ),
       ),
@@ -57,7 +62,7 @@ void main() {
       home: Scaffold(
         body: BlocProvider<MainViewBloc>(
           create: (BuildContext context) => mainViewBlocMock,
-          child: MainViewForm(),
+          child: const MainViewForm(),
         ),
       ),
     );

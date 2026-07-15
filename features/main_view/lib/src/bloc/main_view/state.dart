@@ -1,6 +1,5 @@
 part of 'bloc.dart';
 
-@immutable
 abstract class MainViewState {} //extends Equatable {}
 
 class EmptyState extends MainViewState {

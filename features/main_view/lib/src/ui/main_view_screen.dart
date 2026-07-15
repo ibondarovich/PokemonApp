@@ -33,7 +33,7 @@ class MainViewScreen extends StatelessWidget {
             getPokemonsUseCase: appLocator.get<FetchPokemonsUseCase>(),
             savePokemonsUseCase: appLocator.get<SavePokemonsUseCase>(),
           ),
-          child: MainViewForm(),
+          child: const MainViewForm(),
         ),
       ),
     );

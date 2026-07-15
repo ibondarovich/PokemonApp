@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:core/core.dart';
-import 'package:data/data.dart';
 import 'package:data/entity/pokemon_detailed_entity.dart';
 import 'package:data/entity/pokemon_entity.dart';
 import 'package:path/path.dart';
@@ -59,16 +57,13 @@ class SqlLiteProvider implements LocalProvider {
 
   @override
   Future<void> saveAll(List<PokemonEntity> entities) async {
-    int result = 0;
     final Database db = await initPokemons();
     final res = await db.query('Pokemons');
     if (res.isEmpty) {
-      Map<String, dynamic> map = {};
       for (var val in entities) {
         Map<String, dynamic> entity = val.toMap();
         await db.insert('Pokemons', entity);
       }
-      final res = await db.query('Pokemons');
     }
   }
 
