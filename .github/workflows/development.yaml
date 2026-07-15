@@ -58,7 +58,7 @@ jobs:
     ios:
 
         name: Build iOS
-        needs: analyze_test
+        needs: analyze_tests
         runs-on: macos-latest
 
 
