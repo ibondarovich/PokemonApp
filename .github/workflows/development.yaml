@@ -20,6 +20,9 @@ jobs:
             
             - name: Install dependencies
               run: flutter pub get
+
+            - name: Run prebuild script
+              run: ./fast_prebuild_script_mac.sh
               
             - name: Analyze
               run: flutter analyze
