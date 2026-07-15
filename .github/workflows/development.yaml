@@ -22,6 +22,7 @@ jobs:
               run: flutter pub get
 
             - name: Run prebuild script
+              shell: bash
               run: ./fast_prebuild_script_mac.sh
               
             - name: Analyze
