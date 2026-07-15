@@ -58,9 +58,9 @@ allDirs
   '
 )
 
-# Generate auto route files
-(
-    cd "navigation" || exit
-    echo_styled "Generating auto route files in navigation" 33
-    dart run build_runner build --delete-conflicting-outputs
-)
+## Generate auto route files
+#(
+#    cd "navigation" || exit
+#    echo_styled "Generating auto route files in navigation" 33
+#    dart run build_runner build --delete-conflicting-outputs
+#)
