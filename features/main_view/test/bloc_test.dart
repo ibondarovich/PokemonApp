@@ -16,13 +16,12 @@ class MockMainViewBloc extends MockBloc<MainViewEvent, MainViewState>
 ])
 void main() {
   late PokemonModel pokemonModel;
-  late MainViewBloc mainViewBloc;
   late MockFetchPokemonsUseCase mockFetchPokemonsUseCase;
   late MockSavePokemonsUseCase mockSavePokemonsUseCase;
 
   group('MainViewBloc', () {
     setUp(() async {
-      pokemonModel = PokemonModel(
+      pokemonModel = const PokemonModel(
         url: 'url',
         name: 'test',
       );

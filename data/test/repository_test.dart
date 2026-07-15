@@ -1,8 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:core/di/app_di.dart';
 import 'package:core/di/data_di.dart';
-import 'package:core/network/network_info.dart';
 import 'package:core/network/network_info_impl.dart';
 import 'package:data/data.dart';
 import 'package:data/entity/pokemon_detailed_entity.dart';

@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:data/data.dart';
 
 class PokemonDetailedEntity{
   final String name;

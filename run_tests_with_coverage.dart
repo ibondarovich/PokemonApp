@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
+
 void main() async {
   await checkAndTestModules(['domain', 'data', 'features']);
   await runIntegrationTest();
@@ -10,8 +12,10 @@ Future<void> checkAndTestModules(List<String> modules) async {
 
   // Ensure the script is executed in the root of a Flutter project
   if (!(await File('${currentDirectory.path}/pubspec.yaml').exists())) {
-    print(
+    if (kDebugMode) {
+      print(
         'Error: Not in a Flutter project directory. Make sure to run this script in the root of the project.');
+    }
     return;
   }
 
@@ -19,16 +23,22 @@ Future<void> checkAndTestModules(List<String> modules) async {
     final moduleDirectory = Directory('${currentDirectory.path}/$module');
 
     if (await moduleDirectory.exists()) {
-      print('Checking module: $module');
+      if (kDebugMode) {
+        print('Checking module: $module');
+      }
       await _runTestsRecursively(moduleDirectory);
     } else {
-      print('⚠️ Module not found: $module');
+      if (kDebugMode) {
+        print('⚠️ Module not found: $module');
+      }
     }
   }
 }
 
 Future<void> runIntegrationTest() async {
-  print('Running Integration test...');
+  if (kDebugMode) {
+    print('Running Integration test...');
+  }
 
   final result = await Process.run(
     'flutter',
@@ -38,11 +48,19 @@ Future<void> runIntegrationTest() async {
   );
 
   if (result.exitCode != 0) {
-    print('❌ Integration test failed');
-    print(result.stdout);
-    print(result.stderr);
+    if (kDebugMode) {
+      print('❌ Integration test failed');
+    }
+    if (kDebugMode) {
+      print(result.stdout);
+    }
+    if (kDebugMode) {
+      print(result.stderr);
+    }
   } else {
-    print('✅ Integration test passed');
+    if (kDebugMode) {
+      print('✅ Integration test passed');
+    }
   }
 }
 
@@ -67,7 +85,9 @@ Future<void> _runTestsRecursively(Directory directory) async {
   // Check if the current directory contains tests
   final testDirectory = Directory('${directory.path}/test');
   if (await testDirectory.exists()) {
-    print('Running tests in: ${directory.path}');
+    if (kDebugMode) {
+      print('Running tests in: ${directory.path}');
+    }
     final result = await Process.run(
       'flutter',
       ['test', '--coverage'],
@@ -82,11 +102,19 @@ Future<void> _runTestsRecursively(Directory directory) async {
         workingDirectory: directory.path,
         runInShell: true,
       );
-      print('✅ Tests passed for: ${directory.path}');
+      if (kDebugMode) {
+        print('✅ Tests passed for: ${directory.path}');
+      }
     } else {
-      print('❌ Tests failed for: ${directory.path}');
-      print(result.stdout);
-      print(result.stderr);
+      if (kDebugMode) {
+        print('❌ Tests failed for: ${directory.path}');
+      }
+      if (kDebugMode) {
+        print(result.stdout);
+      }
+      if (kDebugMode) {
+        print(result.stderr);
+      }
     }
   }
 
