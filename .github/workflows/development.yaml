@@ -1,0 +1,98 @@
+name: development pipeline
+
+on:
+    push:
+    pull_request:
+
+jobs:
+    analyze_tests:
+        runs-on: ubuntu-latest
+        
+        steps:
+            - name: Checkouut
+              uses: actions/checkput@4
+            
+            - name: Setup Flutter
+              uses: subosito/flutter-action@v2
+              with:
+                flutter-version: "3.35.0"
+                cache: true
+            
+            - name: Install dependencies
+              run: flutter pub get
+              
+            - name: Analyze
+              run: flutter analyze
+              
+            - name: Tests
+              run: flutter test
+    
+    android:
+        name: Build Android
+        needs: analyze_tests
+        runs-on: ubuntu-latest
+        
+        steps:
+            - name: Checkouut
+              uses: actions/checkput@4
+            
+            - name: Setup Flutter
+              uses: subosito/flutter-action@v2
+              with:
+                flutter-version: "3.35.0"
+                cache: true
+
+              
+            - name: Install dependencies
+              run: flutter pub get
+              
+            - name: Build Android
+              run: flutter build appbundle --release
+              
+            - name: Upload Android artifact
+              uses: actions/upload-artifact@v4
+              with:
+                name: android-release
+                path: build/app/outputs/bundle/release/app-release.aab
+                
+    ios:
+
+        name: Build iOS
+        needs: analyze_test
+        runs-on: macos-latest
+
+
+        steps:
+
+          - name: Checkout
+            uses: actions/checkout@v4
+
+
+          - name: Setup Flutter
+            uses: subosito/flutter-action@v2
+            with:
+              flutter-version: "3.35.0"
+              cache: true
+
+
+          - name: Install dependencies
+            run: flutter pub get
+
+
+          - name: Install pods
+            run: pod install
+            working-directory: ios
+
+
+          - name: Build iOS
+            run: flutter build ios --release --no-codesign
+
+
+          - name: Upload iOS artifact
+            uses: actions/upload-artifact@v4
+            with:
+              name: ios-release
+              path: build/ios/iphoneos
+
+            
+
